@@ -176,7 +176,7 @@ describe('DELETE endpoint', function() {
         should.not.exist(_post);
       });
 
-  })
+  });
 
 });
 
