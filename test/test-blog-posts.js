@@ -95,9 +95,65 @@ describe('BlogPosts API resource', function() {
         resBlogPost.content.should.equal(post.content);
         resBlogPost.author.should.contain(post.author.firstName);
       });
-    })
+    });
 
+  });
 
-  })
+  describe('POST endpoint', function() {
+
+    it('should add a new post', function() {
+      const newPost = generateBlogPostData();
+
+      return chai.request(app)
+      .post('/posts')
+      .send(newPost)
+      .then(function(res) {
+        res.should.have.status(201);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.include.keys('title', 'content', 'author');
+        res.body.title.should.equal(newPost.title);
+        res.body.id.should.not.be.null;
+        res.body.content.should.equal(newPost.content);
+        return BlogPost.findById(res.body.id);
+      })
+      .then(function(post) {
+        post.title.should.equal(newPost.title);
+        post.author.firstName.should.equal(newPost.author.firstName);
+        post.author.lastName.should.equal(newPost.author.lastName);
+        post.content.should.equal(newPost.content);
+      });
+    });
+  });
+
+  describe('PUT endpoint', function() {
+
+    it('should update fields sent over', function() {
+      const updateDate = {
+        title: 'fofofofof',
+        content: 'lalalala'
+      };
+
+      return BlogPost
+        .findOne()
+        .exec()
+        .then(function(post) {
+          updateDate.id = post.id;
+
+          return chai.request(app)
+            .put(`/posts/${post.id}`)
+            .send(updateDate);
+        })
+        .then(function(res) {
+          res.should.have.status(201);
+          return BlogPost.findById(updateDate.id).exec();
+        })
+        .then(function(post) {
+          post.title.should.equal(updateDate.title);
+          post.content.should.equal(updateDate.content);
+        });
+    });
+
+  });
 
 })
