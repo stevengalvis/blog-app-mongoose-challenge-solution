@@ -7,7 +7,7 @@ const should = chai.should();
 
 const {BlogPost} = require('../models');
 const {app, runServer, closeServer} = require('../server');
-const {TEST_DATABASE_URL} = require('../config');
+const {DATABASE_URL, TEST_DATABASE_URL} = require('../config');
 
 chai.use(chaiHttp);
 
@@ -41,7 +41,7 @@ function teardownDb() {
 describe('BlogPosts API resource', function() {
 
   before(function() {
-    return runServer(TEST_DATABASE_URL);
+    return runServer(DATABASE_URL);
   });
 
   beforeEach(function() {
@@ -67,8 +67,18 @@ describe('BlogPosts API resource', function() {
         res = _res;
         res.should.have.status(200);
         res.body.should.have.length.of.at.least(1);
-      });
 
+        return BlogPost.count();
+      })
+      .then(count => {
+          // the number of returned posts should be same
+          // as number of posts in DB
+
+          console.log(res.body);
+          res.body.length.should.equal(count);
+
+
+          });
     });
 
     it('should return posts with right fields', function() {
