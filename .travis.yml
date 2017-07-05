@@ -4,4 +4,8 @@ services:
 - mongodb
 deploy:
   provider: heroku
+  api_key:
+    secure: AVCzvzEoONU0rP6WP8NPr836V9Dx/mpn8amZYuTK0rt8WqshBfAm921DD0Afm3dGpAHvEqanUkYhWnxkWLB2AMs4bdsFIMg/pHW3/1KL5afj4v4Pf0skTmME2fSCWIteHziy6tu7wT+rSp5kzaW4r5LR8ziy5c618L1cZknU5X/5KEiC3H2Uti8zFygHO9lWT0z3q+3XXBSWIs/SQsQKO3H3NCaXxEA4OayhdHCm0NZVCHFdKxZRghigeR/n+DvvG2R/9jKNWOVmhYhIue3yGVOAZVXaV65VBKlIbL4d8+UsGKdK/wAkh0BqhUXI2SJoevgi5JTkxpgjxh2Pux+6AEWL4LOAVwFhh4bhUlsh3/2c3C2O9gHPCnMyRdG4UjYFPWSm2gp+h4l0WB9wnh7XK/HuZLDhzdGN5W71aFMTMjvzzFBu4UACrJOfVudvu0bx/61SQEqKJTzIR4P+wdEU6Is+PpDUGJW8VfozexWkT+9mLr/PQfJT4tc3fEUOapSALVzaw7WhHDwiaGpBTYCVHkxIekMrMKOYj0ITuEFZ5E95hU7gDsRKijFma4jc0R9CwVohOmj3qZSbhzZTpxVW1KmBLi0297/lC6rDCQ2kVFf3JSwSeJZaKb9WKf2tMggekg4jdEEpr33QNkjAFevDMBshTrHicsPq3wqO56hjZBk=
   app: glacial-ravine-37272
+  on:
+    repo: stevengalvis/blog-app-mongoose-challenge-solution
