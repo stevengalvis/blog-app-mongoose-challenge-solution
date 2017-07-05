@@ -3,4 +3,5 @@ node_js: node
 services:
 - mongodb
 deploy:
+  provider: heroku
   app: glacial-ravine-37272
